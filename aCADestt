@@ -1,0 +1,25 @@
+local function HighlightPart(part)
+            local highlightGui = Instance.new("BillboardGui")
+            highlightGui.Size = UDim2.new(1, 0, 1, 0)
+            highlightGui.Adornee = part
+            highlightGui.AlwaysOnTop = true
+            highlightGui.Parent = part
+        
+            local highlightFrame = Instance.new("Frame")
+            highlightFrame.Size = UDim2.new(1, 0, 1, 0)
+            highlightFrame.BackgroundTransparency = 0.5
+            highlightFrame.BackgroundColor3 = Color3.new(1, 1, 0) -- Yellow color
+            highlightFrame.Parent = highlightGui
+        end
+        
+        for _, part in pairs(game.Workspace:GetDescendants()) do
+            if part:IsA("Part") and part.Parent.Name == "Stranded Yacht" then
+                HighlightPart(part)
+            end
+        end
+        
+        game.Workspace.DescendantAdded:Connect(function(v)
+            if v:IsA("Part") and v.Parent.Name == "Stranded Yacht" then
+                HighlightPart(v)
+            end
+        end)
